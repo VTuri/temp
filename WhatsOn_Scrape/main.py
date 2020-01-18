@@ -71,22 +71,12 @@ class Scrape(object):
                     break
         return self.data_dict
 
-    def save_data(self):
-        try:
-            csv_file = "whatsonmalta.csv"
-            dict_df = pandas.DataFrame.from_dict(self.data_dict)
-            dict_df.to_csv(csv_file, index=False)
-        except IOError:
-            print("I/O error")
-
     def quit(self):
         self.driver.quit()
 
 
-
 if __name__ == '__main__':
-    scrape = Scrape(numbers_per_page=argv[1], from_date="17/01/2020", to_date="24/01/2020")
+    scrape = Scrape(numbers_per_page=100, from_date="01/02/2020", to_date="10/02/2020")
     scrape.startSelenium()
     scraped_dict = scrape.parseData()
-    scrape.save_data()
     scrape.quit()

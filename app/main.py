@@ -28,8 +28,11 @@ class Scrape(object):
 
     def startSelenium(self):
         option = webdriver.ChromeOptions()
-        option.add_argument("--no-sandbox")
-        option.add_argument("--headless")
+        option.add_argument("no-sandbox")
+        option.add_argument("headless")
+        option.add_argument("privileged")
+        option.add_argument("window-size=1200x800")
+
         self.driver = webdriver.Chrome(executable_path="./chromedriver", options=option)
         self.driver.get(self.url)
 

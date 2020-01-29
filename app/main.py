@@ -16,6 +16,7 @@ class Scrape(object):
         "Type": [],
     }
 
+    data_list = []
     rows = []
 
     def __init__(self, numbers_per_page, from_date, to_date, ):
@@ -47,32 +48,41 @@ class Scrape(object):
                     if column_element == 1:
                         if len(data) == 0:
                             data = "NONE"
-                        self.data_dict["Date"].append(data)
+                        self.data_dict["Date"] =data
 
                     elif column_element == 2:
                         if len(data) == 0:
                             data = "NONE"
-                        self.data_dict["Event"].append(data)
+                        self.data_dict["Event"] = data
 
                     elif column_element == 3:
                         if len(data) == 0:
                             data = "NONE"
-                        self.data_dict["Location"].append(data)
+                        self.data_dict["Location"] = data
 
                     elif column_element == 4:
                         if len(data) == 0:
                             data = "NONE"
-                        self.data_dict["Venue"].append(data)
+                        self.data_dict["Venue"] = data
 
                     elif column_element == 5:
                         if len(data) == 0:
                             data = "NONE"
                         data = data.split("/")
-                        self.data_dict["Type"].append(data)
+                        self.data_dict["Type"] = data
+
+
 
                 except:
                     break
-        return self.data_dict
+            if len(self.data_dict) >0:
+                self.data_list.append(self.data_dict.copy())
+            self.data_dict.clear()
+
+        self.data_list=self.data_list[1:]
+
+
+        return self.data_list
 
     def quit(self):
         self.driver.quit()

@@ -87,6 +87,8 @@ class Scrape(object):
     def quit(self):
         self.driver.quit()
 
+    def clear(self):
+        self.data_list.clear()
 
 if __name__ == '__main__':
     scrape = Scrape(numbers_per_page=100, from_date="01/02/2020", to_date="10/02/2020")

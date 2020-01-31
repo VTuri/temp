@@ -11,14 +11,17 @@ def get_data():
     /scrape/?number=100&from=01/02/2020&to=10/02/2020
     :return: json scraped data
     """
+    result=[]
     item_number = request.args.get("number")
     from_date = request.args.get("from")
     to_date = request.args.get("to")
     scrape = Scrape(numbers_per_page=item_number, from_date=from_date, to_date=to_date)
     scrape.startSelenium()
-    scraped_dict = scrape.parseData()
+    scraped_list = scrape.parseData()
+    result = scraped_list.copy()
+    scrape.clear()
     scrape.quit()
-    return jsonify(scraped_dict)
+    return jsonify(result)
 
 
 if __name__ == "__main__":

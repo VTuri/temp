@@ -22,6 +22,7 @@ def get_data():
 
     scrape.parseData()
     scrape.clean_data()
+    scrape.delete_duplicates()
     scraped_list = scrape.get_data()
     result = scraped_list.copy()
     scraped_list.clear()

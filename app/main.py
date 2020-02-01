@@ -70,6 +70,7 @@ class Scrape(object):
                         if len(data) == 0:
                             data = "NONE"
                         data = data.split("/")
+                        data = tuple(data)
                         self.data_dict["Type"] = data
 
 
@@ -98,12 +99,25 @@ class Scrape(object):
                 event["Type"] = event["Type"][0]
 
     def get_data(self):
-        return self.data_list
+        return self.no_duplicate_list
+
+    def delete_duplicates(self):
+        self.data_set = set()
+        self.no_duplicate_list = []
+        for d in self.data_list:
+            t = tuple(d.items())
+            if t not in self.data_set:
+                self.data_set.add(t)
+                self.no_duplicate_list.append(d)
+
+        return self.no_duplicate_list
 
 
 if __name__ == '__main__':
     scrape = Scrape(numbers_per_page=100, from_date="01/02/2020", to_date="10/02/2020")
     scrape.startSelenium()
     scrape.parseData()
+    scrape.clean_data()
+    scrape.delete_duplicates()
     scraped_list = scrape.get_data()
     scrape.quit()

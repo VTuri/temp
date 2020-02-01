@@ -19,7 +19,9 @@ def get_data():
     scrape.startSelenium()
     #Without this the API stores the previous result and it returns is
     scrape.clear()
-    scraped_list = scrape.parseData()
+    scrape.parseData()
+    scrape.clean_data()
+    scraped_list =scrape.get_data()
     result = scraped_list.copy()
     scraped_list.clear()
     scrape.quit()

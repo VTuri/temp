@@ -4,6 +4,7 @@ from sys import argv
 
 page_index = str(1)
 
+
 # docker pull centos:centos8.1.1911
 # TODO https://developpaper.com/centos7-install-selenium/
 
@@ -48,7 +49,7 @@ class Scrape(object):
                     if column_element == 1:
                         if len(data) == 0:
                             data = "NONE"
-                        self.data_dict["Date"] =data
+                        self.data_dict["Date"] = data
 
                     elif column_element == 2:
                         if len(data) == 0:
@@ -75,14 +76,13 @@ class Scrape(object):
 
                 except:
                     break
-            if len(self.data_dict) >0:
+
+            if len(self.data_dict) > 0:
                 self.data_list.append(self.data_dict.copy())
+
             self.data_dict.clear()
 
-        self.data_list=self.data_list[1:]
-
-
-        return self.data_list
+        self.data_list = self.data_list[1:]
 
     def quit(self):
         self.driver.quit()
@@ -90,8 +90,20 @@ class Scrape(object):
     def clear(self):
         self.data_list.clear()
 
+    def clean_data(self):
+        for event in self.data_list:
+            if len(event["Type"]) > 1:
+                event["Type"] = ', '.join(event["Type"])
+            else:
+                event["Type"] = event["Type"][0]
+
+    def get_data(self):
+        return self.data_list
+
+
 if __name__ == '__main__':
     scrape = Scrape(numbers_per_page=100, from_date="01/02/2020", to_date="10/02/2020")
     scrape.startSelenium()
-    scraped_dict = scrape.parseData()
+    scrape.parseData()
+    scraped_list = scrape.get_data()
     scrape.quit()

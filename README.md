@@ -1,7 +1,7 @@
 
 # WhatsOnMalta Scraper
 
-One Paragraph of project description goes here
+A docker based scraper which returns a list of events from a website based on a search parameters
 <br>
 <h4 align="left"> Try out the live demo <a href="http://vajkturi.com/whatson_scrape/" target="_blank">Link</a>.</h4>
 

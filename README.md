@@ -39,7 +39,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 
 * Clone the repository
-* CD into the directory
+* Open the cloned directory
 * Build the conatiner
 ```
 docker-compose build .

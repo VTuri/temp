@@ -6,7 +6,9 @@ services:
     ports:
       - 5001:5000
     networks:
-      - django_website_default
+      - portfolio_website_default
+
 networks:
-  django_website_default:
+  portfolio_website_default:
     external: true
+
